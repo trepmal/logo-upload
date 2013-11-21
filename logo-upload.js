@@ -20,6 +20,9 @@ jQuery(document).ready( function($) {
 			button: {
 				text: jQuery( this ).data( 'uploader_button_text' ),
 			},
+			library: {
+				type: 'image'
+			},
 			multiple: false  // Set to true to allow multiple files to be selected
 		});
 
