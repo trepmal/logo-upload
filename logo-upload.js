@@ -1,10 +1,11 @@
 jQuery(document).ready( function($) {
 
 	var file_frame,
-		$button = $('.upload-image'),
-		$removeButton = $('.remove-image');
+		$button       = $('.upload-image'),
+		$removeButton = $('.remove-image'),
+		$logoPreview  = $('#logo-preview');
 
-	$button.click( function( event ){
+	$button.on( 'click', function( event ){
 
 		event.preventDefault();
 
@@ -31,15 +32,13 @@ jQuery(document).ready( function($) {
 			// We set multiple to false so only get one image from the uploader
 			attachment = file_frame.state().get('selection').first().toJSON();
 
-			if ( $button.next('input').next('br').next('img').length > 0 ) {
-				$button.next('input').next('br').next('img').remove();
-			}
-
 			// set input
 			$('#blog_logo').val( attachment.id );
+
 			// set preview
-			img = '<img src="'+ attachment.url +'" />';
-			$button.next('input').next('br').after( img );
+			img = '<img src="'+ attachment.sizes.medium.url +'" /><br />';
+			img += '<a href="'+ attachment.url +'">' + logoUpload.textFullSize + '</a>';
+			$logoPreview.html( img );
 
 		});
 
@@ -47,11 +46,13 @@ jQuery(document).ready( function($) {
 		file_frame.open();
 	});
 
-	$removeButton.click( function( event ){
+	$removeButton.on( 'click', function( event ){
 
 		event.preventDefault();
 
 		$('#blog_logo').val('');
-		$removeButton.next('br').next('img').remove();
+		$logoPreview.html( '' );
+
 	});
+
 });
