@@ -16,12 +16,12 @@ $logo_upload = new Logo_Upload;
 class Logo_Upload {
 
 	function __construct( ) {
-		add_filter( 'admin_init' , array( &$this , 'register_fields' ) );
+		add_filter( 'admin_init' , array( $this , 'register_fields' ) );
 	}
 
 	function register_fields() {
 		register_setting( 'general', 'blog_logo', 'intval' );
-		add_settings_field('blog_logo', '<label for="blog_logo">'. __('Blog Logo', 'logo-upload' ) .'</label>' , array(&$this, 'fields_html') , 'general' );
+		add_settings_field('blog_logo', '<label for="blog_logo">'. __('Blog Logo', 'logo-upload' ) .'</label>' , array($this, 'fields_html') , 'general' );
 	}
 
 	function fields_html() {
